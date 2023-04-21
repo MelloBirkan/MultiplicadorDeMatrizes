@@ -1,13 +1,18 @@
+#Acabei XD so falta o relatorio -- patetico aiai <3 
+
 import os
 from threading import Thread
 
 # Função para realizar a multiplicação de uma linha de A por uma coluna de B
 def multiplicar_elemento(i, j, matrizA, matrizB, matrizC):
+  
     for k in range(len(matrizA[0])):
         matrizC[i][j] += matrizA[i][k] * matrizB[k][j]
 
+
 # Função para multiplicar duas matrizes utilizando threads
 def multiplicar_matrizes(matrizA, matrizB):
+  
     linhasA, colunasA = len(matrizA), len(matrizA[0])
     linhasB, colunasB = len(matrizB), len(matrizB[0])
 
@@ -32,6 +37,7 @@ def multiplicar_matrizes(matrizA, matrizB):
 
 # Função para carregar matrizes de um arquivo
 def carregar_matrizes_do_arquivo(nome_arquivo=None):
+  
     if nome_arquivo is None:
         nome_arquivo = input("Digite o nome do arquivo: ")
 
@@ -49,10 +55,12 @@ def carregar_matrizes_do_arquivo(nome_arquivo=None):
         print("Arquivo não encontrado.")
         return None, None
 
+
 # Função para resolver o problema 1 e calcular a matriz resultante
 def resolver_exe1_resolver_matriz():
+  
     # Perguntar ao usuário se deseja carregar as matrizes de um arquivo
-    print("Exercício 1)\n")
+    print("\nExercício 1)\n")
     opcao = input("Deseja carregar as matrizes de um arquivo? (s/n): ")
 
     if opcao.lower() == 's':
@@ -101,20 +109,23 @@ def resolver_exe2():
             f"\nB)\tO valor da casa moderna é R${casa_moderna}\n\tO valor da casa mediterranea é R${casa_mediterraneo}\n\tO valor da casa colonial é R${casa_colonial}.\n"
         )
 
+
 # Função para resolver o problema 3
 def resolver_exe3():
-  print("Exercício 3)")
+  
+  print("Exercício 3)\n")
   A, B = carregar_matrizes_do_arquivo("exe3.txt")
   if A:
     resultado = multiplicar_matrizes(A, B)
     mulheres, homens = resultado[1], resultado[0]
 
-    comparar_grupos("carboidratos", mulheres[0], homens[0])
-    comparar_grupos("proteínas", mulheres[1], homens[1])
-    comparar_grupos("cilindros", mulheres[2], homens[2])
+    comparar_grupos("proteínas", mulheres[0], homens[0])
+    comparar_grupos("gorduras", mulheres[1], homens[1])
+    comparar_grupos("carboidratos", mulheres[2], homens[2])
 
 
 def comparar_grupos(tipo, mulheres, homens):
+  
   if mulheres >= homens:
     print(f"As mulheres são as que mais comem {tipo}: {mulheres} - elas comem {mulheres - homens} a mais que os homens")
   else:
@@ -123,6 +134,7 @@ def comparar_grupos(tipo, mulheres, homens):
 
 # Função principal
 def main():
+  
     resolver_exe2()
     resolver_exe3()
     resolver_exe1_resolver_matriz()

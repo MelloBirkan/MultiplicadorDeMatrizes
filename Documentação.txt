@@ -1,0 +1,50 @@
+Documentação do código:
+
+Este código realiza operações com matrizes e é composto por diferentes funções que realizam a multiplicação de matrizes, carregam matrizes de arquivos, comparam grupos e resolvem problemas específicos.
+
+
+Funções:
+
+multiplicar_elemento(i, j, matrizA, matrizB, matrizC): Essa função realiza a multiplicação de uma linha de A por uma coluna de B e armazena o resultado na matrizC.
+multiplicar_matrizes(matrizA, matrizB): Essa função multiplica duas matrizes utilizando threads, o que ajuda a melhorar a eficiência do código.
+carregar_matrizes_do_arquivo(nome_arquivo=None): Essa função carrega matrizes de um arquivo cujo nome é passado como argumento, ou solicita o nome do arquivo ao usuário caso não seja fornecido.
+resolver_exe1_resolver_matriz(): Essa função resolve o problema 1 e calcula a matriz resultante.
+resolver_exe2(): Essa função resolve o problema 2, que está relacionado a construção de casas e seus custos.
+resolver_exe3(): Essa função resolve o problema 3, que compara o consumo de proteínas, gorduras e carboidratos entre homens e mulheres.
+comparar_grupos(tipo, mulheres, homens): Essa função compara os grupos de acordo com o tipo (proteínas, gorduras ou carboidratos) e retorna o grupo que consome mais daquele tipo.
+main(): Essa é a função principal do programa que chama as funções para resolver os problemas 2, 3 e 1.
+Ao executar o programa, ele começará chamando a função main() que, por sua vez, executará as funções para resolver os problemas 2, 3 e 1 na ordem. Os resultados são exibidos no console.
+
+
+Para fornecer entradas no código, siga os passos abaixo:
+
+Execute o código em seu ambiente de desenvolvimento Python favorito.
+Quando solicitado, forneça as entradas conforme as instruções exibidas no console.
+Existem dois modos de fornecer entradas para as matrizes no código:
+
+Digitar diretamente no console;
+Carregar as matrizes de um arquivo de texto.
+No caso de carregar as matrizes de um arquivo de texto, a função carregar_matrizes_do_arquivo(nome_arquivo=None) é utilizada.
+
+Aqui está como funciona o leitor de arquivo de texto:
+
+Se o argumento nome_arquivo for fornecido, ele será usado como o nome do arquivo. Caso contrário, o programa solicitará ao usuário que digite o nome do arquivo no console.
+A função verifica se o arquivo com o nome fornecido existe. Se não existir, exibirá uma mensagem informando que o arquivo não foi encontrado.
+Se o arquivo existir, ele será aberto no modo de leitura ('r').
+As dimensões das matrizes A e B são lidas da primeira linha do arquivo. As dimensões devem estar separadas por espaço. Por exemplo: 3 3 para uma matriz 3x3.
+As próximas linhas correspondem aos elementos da matriz A, uma linha por vez. Os elementos de cada linha devem ser separados por espaço. Por exemplo: 1 2 3.
+Após a leitura da matriz A, a função lê as dimensões da matriz B da próxima linha.
+As próximas linhas correspondem aos elementos da matriz B, semelhante à matriz A.
+A função retorna as matrizes A e B.
+Exemplo de formato de arquivo de texto:
+3 3
+1 2 3
+4 5 6
+7 8 9
+3 3
+9 8 7
+6 5 4
+3 2 1
+Este exemplo de arquivo de texto contém duas matrizes 3x3. A primeira matriz (A) tem elementos de 1 a 9, e a segunda matriz (B) tem elementos de 9 a 1.
+
+Lembre-se de que o arquivo de texto deve estar no mesmo diretório do código para que seja encontrado corretamente. Caso contrário, forneça o caminho completo para o arquivo.
