@@ -1,32 +1,34 @@
 import os
-import threading
+from threading import Thread
 
+# Função para realizar a multiplicação de uma linha de A por uma coluna de B
+def multiplicar_elemento(i, j, matrizA, matrizB, matrizC):
+    for k in range(len(matrizA[0])):
+        matrizC[i][j] += matrizA[i][k] * matrizB[k][j]
 
-# Função para multiplicar duas matrizes
+# Função para multiplicar duas matrizes utilizando threads
 def multiplicar_matrizes(matrizA, matrizB):
-    # Obter as dimensões das matrizes A e B
-    linhasA = len(matrizA)
-    colunasA = len(matrizA[0])
-    linhasB = len(matrizB)
-    colunasB = len(matrizB[0])
+    linhasA, colunasA = len(matrizA), len(matrizA[0])
+    linhasB, colunasB = len(matrizB), len(matrizB[0])
 
-    # Verificar se a multiplicação é possível
-    if colunasA == linhasB:
-        # Criar uma matriz C com a quantidade de linhas de A e colunas de B
-        matrizC = [[0] * colunasB for _ in range(linhasA)]
-
-        # Realizar a multiplicação das matrizes
-        for i in range(linhasA):
-            for j in range(colunasB):
-                for k in range(colunasA):
-                    matrizC[i][j] += matrizA[i][k] * matrizB[k][j]
-
-        # Retornar a matriz resultante da multiplicação
-        return matrizC
-    else:
-        # Retornar uma mensagem de erro se a multiplicação não for possível
+    if colunasA != linhasB:
         print("Matriz não multiplicável")
         return None
+
+    matrizC = [[0] * colunasB for _ in range(linhasA)]
+
+    threads = []
+    for i in range(linhasA):
+        for j in range(colunasB):
+            thread = Thread(target=multiplicar_elemento, args=(i, j, matrizA, matrizB, matrizC))
+            threads.append(thread)
+            thread.start()
+
+    for thread in threads:
+        thread.join()
+
+    return matrizC
+
 
 # Função para carregar matrizes de um arquivo
 def carregar_matrizes_do_arquivo(nome_arquivo=None):
@@ -83,26 +85,18 @@ def resolver_exe1_resolver_matriz():
 # Função para resolver o problema 2
 def resolver_exe2():
     print("Exercício 2)\n")
-
-    def calc_valores(A, B):
-        nonlocal casa_moderna, casa_mediterraneo, casa_colonial
-        resultado = multiplicar_matrizes(A, B)
-        casa_moderna = resultado[0][0]
-        casa_mediterraneo = resultado[1][0]
-        casa_colonial = resultado[2][0]
-
     A, B = carregar_matrizes_do_arquivo("exe2.txt")
     if A:
         resultado = multiplicar_matrizes(A, B)
         print(
             f"A)\tO contrutor precisará de {resultado[0][0]} ferros, {resultado[0][1]} madeiras, {resultado[0][2]} vidros, {resultado[0][3]} tintas e {resultado[0][4]} tijolos."
         )
-
-        casa_moderna = casa_mediterraneo = casa_colonial = None
-        thread = threading.Thread(target=calc_valores, args=(B, [[15.00], [8, 00], [5, 00], [1, 00], [10, 00]]))
-        thread.start()
-        thread.join()
-
+        # Resolver valores
+        resultado = multiplicar_matrizes(
+            B, [[15.00], [8, 00], [5, 00], [1, 00], [10, 00]])
+        casa_moderna = resultado[0][0]
+        casa_mediterraneo = resultado[1][0]
+        casa_colonial = resultado[2][0]
         print(
             f"\nB)\tO valor da casa moderna é R${casa_moderna}\n\tO valor da casa mediterranea é R${casa_mediterraneo}\n\tO valor da casa colonial é R${casa_colonial}.\n"
         )
